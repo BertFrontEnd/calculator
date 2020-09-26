@@ -11,25 +11,28 @@
   </head>
   <body>
     <form class="calculator" action="#" name="calc">
+      <div class="current-calculations">0</div>
       <input class="value" type="text" name="txt" readonly value="0" />
-      <span class="num clear">C</span>
-      <span class="num">/</span>
-      <span class="num">*</span>
+      <span id="clear-c">C</span>
+      <span class="operations exponentiation">x&sup2;</span>
+      <span class="operations plus">&#8730;</span>
+      <span id="clear-ce">&#8592;</span>
       <span class="num">7</span>
       <span class="num">8</span>
       <span class="num">9</span>
-      <span class="num">-</span>
+      <span class="operations">&divide;</span>
       <span class="num">4</span>
       <span class="num">5</span>
       <span class="num">6</span>
-      <span class="num plus">+</span>
-      <span class="num">3</span>
-      <span class="num">2</span>
+      <span class="operations">&times;</span>
       <span class="num">1</span>
+      <span class="num">2</span>
+      <span class="num">3</span>
+      <span class="operations">&minus;</span>
+      <span id="decimal">&sdot;</span>
       <span class="num">0</span>
-      <span class="num">00</span>
-      <span class="num">.</span>
-      <span class="num equal">=</span>
+      <span class="operations plus">&plus;</span>
+      <span id="equal">=</span>
     </form>
 
     <script src="script.js"></script>
