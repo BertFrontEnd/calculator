@@ -20,7 +20,7 @@ body .calculator {
   display: grid;
 }
 
-body .calculator .value {
+body .calculator #display {
   grid-column: span 4;
   height: 100px;
   padding: 10px;
@@ -30,7 +30,7 @@ body .calculator .value {
   outline: none;
 }
 
-body .calculator .current-calculations {
+body .calculator #current-calculations {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -38,13 +38,14 @@ body .calculator .current-calculations {
   color: #7a7a7a;
 }
 
-body .calculator span {
+body .calculator button {
   display: -ms-grid;
   display: grid;
   place-items: center;
   width: 80px;
   height: 80px;
   color: #ffffff;
+  outline: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #0c2535;
   -webkit-transition: 0.5s;
@@ -56,29 +57,31 @@ body .calculator span {
           user-select: none;
 }
 
-body .calculator span:hover {
+body .calculator button:hover {
   -webkit-filter: hue-rotate(45deg);
           filter: hue-rotate(45deg);
 }
 
-body .calculator span:active {
-  background-color: #74ff3b;
+body .calculator button:active {
   color: #111111;
+  outline: none;
+  border: none;
+  background-color: #74ff3b;
 }
 
-body .calculator span.clear-c, body .calculator span.clear-ce {
+body .calculator button.clear-c, body .calculator button.clear-ce {
   background-color: #ff3077;
 }
 
-body .calculator span.clear-c:active, body .calculator span.clear-ce:active {
+body .calculator button.clear-c:active, body .calculator button.clear-ce:active {
   background-color: #74ff3b;
 }
 
-body .calculator span.equal {
+body .calculator button.equal {
   background-color: #03b1ff;
 }
 
-body .calculator span.equal:active {
+body .calculator button.equal:active {
   background-color: #74ff3b;
 }
 /*# sourceMappingURL=style.css.map */

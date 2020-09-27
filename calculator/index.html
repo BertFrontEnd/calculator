@@ -10,30 +10,30 @@
     <title>Calculator</title>
   </head>
   <body>
-    <form class="calculator" action="#" name="calc">
-      <div class="current-calculations">0</div>
-      <input class="value" type="text" name="txt" readonly value="0" />
-      <span id="clear-c">C</span>
-      <span class="operations exponentiation">x&sup2;</span>
-      <span class="operations plus">&#8730;</span>
-      <span id="clear-ce">&#8592;</span>
-      <span class="num">7</span>
-      <span class="num">8</span>
-      <span class="num">9</span>
-      <span class="operations">&divide;</span>
-      <span class="num">4</span>
-      <span class="num">5</span>
-      <span class="num">6</span>
-      <span class="operations">&times;</span>
-      <span class="num">1</span>
-      <span class="num">2</span>
-      <span class="num">3</span>
-      <span class="operations">&minus;</span>
-      <span id="decimal">&sdot;</span>
-      <span class="num">0</span>
-      <span class="operations plus">&plus;</span>
-      <span id="equal">=</span>
-    </form>
+    <section class="calculator">
+      <div id="current-calculations">0</div>
+      <input id="display" type="text" readonly value="0" />
+      <button id="clear-c">C</button>
+      <button id="exponent">x&sup2;</button>
+      <button id="square">&#8730;</button>
+      <button id="clear-ce">&#8592;</button>
+      <button class="num" value="7">7</button>
+      <button class="num" value="8">8</button>
+      <button class="num" value="9">9</button>
+      <button class="operations" value="/">&divide;</button>
+      <button class="num" value="4">4</button>
+      <button class="num" value="5">5</button>
+      <button class="num" value="6">6</button>
+      <button class="operations" value="*">&times;</button>
+      <button class="num" value="1">1</button>
+      <button class="num" value="2">2</button>
+      <button class="num" value="3">3</button>
+      <button class="operations" value="-">&minus;</button>
+      <button id="dot" value=".">&sdot;</button>
+      <button class="num" value="0">0</button>
+      <button class="operations" value="+">&plus;</button>
+      <button class="operations" value="=">=</button>
+    </section>
 
     <script src="script.js"></script>
   </body>
