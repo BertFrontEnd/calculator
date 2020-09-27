@@ -69,11 +69,11 @@ body .calculator button:active {
   background-color: #74ff3b;
 }
 
-body .calculator button.clear-c, body .calculator button.clear-ce {
+body .calculator button#clear-c, body .calculator button#clear-ce {
   background-color: #ff3077;
 }
 
-body .calculator button.clear-c:active, body .calculator button.clear-ce:active {
+body .calculator button#clear-c:active, body .calculator button#clear-ce:active {
   background-color: #74ff3b;
 }
 

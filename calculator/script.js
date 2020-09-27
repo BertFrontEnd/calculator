@@ -119,9 +119,11 @@ const clearAllPress = (e) => {
 const clearBackspacePress = (e) => {
   console.log('Клик по "Backspace"');
   let displayValue = display.value;
-  display.value = displayValue.split('').slice(0, -1).join('');
+  display.value = displayValue.slice(0, -1);
   if (display.value.length === 0) {
     display.value = 0;
+  } else {
+    memoryCurrentNumber = display.value;
   }
 };
 
