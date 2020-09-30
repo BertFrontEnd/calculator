@@ -1,7 +1,6 @@
 // Search by DOM
 let numbers = document.querySelectorAll('.num');
 let operations = document.querySelectorAll('.operations');
-let exponent = document.getElementById('exponent');
 let dot = document.getElementById('dot');
 let square = document.getElementById('square');
 let clearAll = document.getElementById('clear-c');
@@ -45,7 +44,7 @@ const numberPress = (num) => {
 
 const operationPress = (operator) => {
   console.log(`Клик по operation ${operator}`);
-  let localOperatorMemory = display.value;
+  let localNumberOfOperatorMemory = display.value;
 
   if (memoryNextNumber && memoryPendingOperator !== '=') {
     display.value = memoryCurrentNumber;
@@ -53,31 +52,36 @@ const operationPress = (operator) => {
     memoryNextNumber = true;
 
     if (memoryPendingOperator === '+') {
-      memoryCurrentNumber += parseFloat(localOperatorMemory);
+      memoryCurrentNumber += parseFloat(localNumberOfOperatorMemory);
     } else if (memoryPendingOperator === '-') {
-      memoryCurrentNumber -= parseFloat(localOperatorMemory);
+      memoryCurrentNumber -= parseFloat(localNumberOfOperatorMemory);
     } else if (memoryPendingOperator === '*') {
-      memoryCurrentNumber *= parseFloat(localOperatorMemory);
+      memoryCurrentNumber *= parseFloat(localNumberOfOperatorMemory);
     } else if (memoryPendingOperator === '/') {
-      memoryCurrentNumber /= parseFloat(localOperatorMemory);
-    } else memoryCurrentNumber = parseFloat(localOperatorMemory);
+      memoryCurrentNumber /= parseFloat(localNumberOfOperatorMemory);
+      if (localNumberOfOperatorMemory === '0') {
+        memoryCurrentNumber = 'error: division by zero';
+      }
+    } else if (memoryPendingOperator === 'pow') {
+      memoryCurrentNumber = parseFloat(Math.pow(memoryCurrentNumber, localNumberOfOperatorMemory));
+    } else memoryCurrentNumber = parseFloat(localNumberOfOperatorMemory);
 
     /* switch (memoryNextNumber) {
       case memoryPendingOperator === '+':
-        memoryCurrentNumber += parseFloat(localOperatorMemory);
+        memoryCurrentNumber += parseFloat(localNumberOfOperatorMemory);
         break;
       case memoryPendingOperator === '-':
-        memoryPendingOperator -= parseFloat(localOperatorMemory);
+        memoryPendingOperator -= parseFloat(localNumberOfOperatorMemory);
         break;
       case memoryPendingOperator === '*':
-        memoryPendingOperator *= parseFloat(localOperatorMemory);
+        memoryPendingOperator *= parseFloat(localNumberOfOperatorMemory);
         break;
       case memoryPendingOperator === '/':
-        memoryPendingOperator /= parseFloat(localOperatorMemory);
+        memoryPendingOperator /= parseFloat(localNumberOfOperatorMemory);
         break;
 
       default:
-        memoryCurrentNumber = localOperatorMemory;
+        memoryCurrentNumber = localNumberOfOperatorMemory;
     } */
 
     display.value = memoryCurrentNumber;
@@ -101,13 +105,8 @@ const dotPress = (e) => {
   display.value = localDecimalMemory;
 };
 
-const exponentPress = (e) => {
-  console.log('Клик по "X*2"');
-  display.value = Math.pow(display.value, 2);
-};
-
 const squarePress = (e) => {
-  display.value = Math.sqrt(display.value);
+  display.value = parseFloat(Math.sqrt(display.value));
 };
 
 const clearAllPress = (e) => {
@@ -123,7 +122,8 @@ const clearBackspacePress = (e) => {
   if (display.value.length === 0) {
     display.value = 0;
   } else {
-    memoryCurrentNumber = display.value;
+    memoryCurrentNumber = parseFloat(display.value);
+    memoryNextNumber = false;
   }
 };
 
@@ -143,8 +143,6 @@ for (let operation of operations) {
 }
 
 dot.addEventListener('click', dotPress);
-
-exponent.addEventListener('click', exponentPress);
 
 square.addEventListener('click', squarePress);
 

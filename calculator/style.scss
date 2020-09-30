@@ -60,14 +60,14 @@ body {
       border: 1px solid rgba(0, 0, 0, 0.1);
       background-color: #0c2535;
       // transition
-      transition: 0.5s;
+      transition: 0.2s;
       // other
       cursor: pointer;
       user-select: none;
 
       &:hover {
         // decor
-        filter: hue-rotate(45deg);
+        background-color: #0c354e;
       }
 
       &:active {
@@ -76,28 +76,7 @@ body {
         // decor
         outline: none;
         border: none;
-        background-color: #74ff3b;
-      }
-
-      &#clear-c,
-      &#clear-ce {
-        // decor
-        background-color: #ff3077;
-
-        &:active {
-          // decor
-          background-color: #74ff3b;
-        }
-      }
-
-      &.equal {
-        // decor
         background-color: #03b1ff;
-
-        &:active {
-          // decor
-          background-color: #74ff3b;
-        }
       }
     }
   }
