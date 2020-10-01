@@ -84,6 +84,7 @@ const operationPress = (operator) => {
         memoryCurrentNumber = localNumberOfOperatorMemory;
     } */
 
+    /* memory.textContent += display.value; */
     display.value = memoryCurrentNumber;
     memoryPendingOperator = operator;
   }
@@ -107,12 +108,14 @@ const dotPress = (e) => {
 
 const squarePress = (e) => {
   display.value = parseFloat(Math.sqrt(display.value));
+  memory.textContent += e.target.value;
 };
 
 const clearAllPress = (e) => {
   console.log('Клик по "C"');
   memoryCurrentNumber = 0;
   display.value = 0;
+  memory.textContent = '';
 };
 
 const clearBackspacePress = (e) => {
@@ -131,6 +134,7 @@ const clearBackspacePress = (e) => {
 for (let number of numbers) {
   number.addEventListener('click', (e) => {
     let targetNumber = e.target.value;
+    memory.textContent += e.target.value;
     numberPress(targetNumber);
   });
 }
@@ -138,6 +142,7 @@ for (let number of numbers) {
 for (let operation of operations) {
   operation.addEventListener('click', (e) => {
     let targetOperation = e.target.value;
+    memory.textContent += e.target.value;
     operationPress(targetOperation);
   });
 }
