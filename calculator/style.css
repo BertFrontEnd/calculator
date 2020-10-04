@@ -89,6 +89,10 @@ body .calculator button:active {
   background-color: #03b1ff;
 }
 
+body .calculator .pow {
+  letter-spacing: -4px;
+}
+
 @-webkit-keyframes gradient {
   0% {
     background-position: 0 50%;
