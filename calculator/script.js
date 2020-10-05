@@ -62,7 +62,7 @@ const operationPress = (operator) => {
       if (localNumberOfOperatorMemory === '0') {
         memoryCurrentNumber = 'error: division by zero';
       }
-    } else if (memoryPendingOperator === 'pow') {
+    } else if (memoryPendingOperator === '^') {
       memoryCurrentNumber = parseFloat(Math.pow(memoryCurrentNumber, localNumberOfOperatorMemory));
     } else memoryCurrentNumber = parseFloat(localNumberOfOperatorMemory);
 
@@ -104,6 +104,7 @@ const dotPress = (e) => {
   }
 
   display.value = localDecimalMemory;
+  /* memory.textContent += localDecimalMemory; */
 };
 
 const squarePress = (e) => {
@@ -154,3 +155,56 @@ square.addEventListener('click', squarePress);
 clearAll.addEventListener('click', clearAllPress);
 
 clearBackspace.addEventListener('click', clearBackspacePress);
+
+const keyNumbers = [/* 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, */ 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
+const keyOperations = [106, 107, 109, 111 /* , 187, 189 */];
+
+document.addEventListener('keydown', (e) => {
+  keyNumbers.forEach((key) => {
+    if (key === e.keyCode) {
+      let targetKeyBoardNumber = e.key;
+      memory.textContent += e.key;
+      numberPress(targetKeyBoardNumber);
+    }
+  });
+});
+
+document.addEventListener('keydown', (e) => {
+  keyOperations.forEach((key) => {
+    if (key === e.keyCode) {
+      let targetKeyBoardOperation = e.key;
+      memory.textContent += e.key;
+      operationPress(targetKeyBoardOperation);
+    }
+  });
+});
+
+/* document.addEventListener('keydown', (e) => {
+  switch (e.keyCode) {
+    case e.keyCode === 13:
+      memory.textContent += '=';
+      operationPress('=');
+      break;
+    default:
+      return;
+  }
+}); */
+
+document.addEventListener('keydown', (e) => {
+  if (e.keyCode === 13) {
+    memory.textContent += '=';
+    operationPress('=');
+  }
+
+  if (e.keyCode === 27) {
+    clearAllPress();
+  }
+
+  if (e.keyCode === 110) {
+    dotPress();
+  }
+
+  if (e.keyCode === 8) {
+    clearBackspacePress();
+  }
+});
