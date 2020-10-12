@@ -102,6 +102,15 @@ body {
       }
     }
 
+    .active {
+      // typography
+      color: #111111;
+      // decor
+      outline: none;
+      border: none;
+      background-color: #03b1ff;
+    }
+
     .pow {
       letter-spacing: -4px;
     }

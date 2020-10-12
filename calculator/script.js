@@ -27,19 +27,6 @@ const numberPress = (num) => {
       display.value += num;
     }
   }
-
-  /* if (memoryNextNumber) {
-    display.value = num;
-    memoryNextNumber = false;
-  } else {
-    switch (display.value === '0') {
-      case true:
-        display.value = num;
-        break;
-      case false:
-        display.value += num;
-    }
-  } */
 };
 
 const operationPress = (operator) => {
@@ -66,25 +53,6 @@ const operationPress = (operator) => {
       memoryCurrentNumber = parseFloat(Math.pow(memoryCurrentNumber, localNumberOfOperatorMemory));
     } else memoryCurrentNumber = parseFloat(localNumberOfOperatorMemory);
 
-    /* switch (memoryNextNumber) {
-      case memoryPendingOperator === '+':
-        memoryCurrentNumber += parseFloat(localNumberOfOperatorMemory);
-        break;
-      case memoryPendingOperator === '-':
-        memoryPendingOperator -= parseFloat(localNumberOfOperatorMemory);
-        break;
-      case memoryPendingOperator === '*':
-        memoryPendingOperator *= parseFloat(localNumberOfOperatorMemory);
-        break;
-      case memoryPendingOperator === '/':
-        memoryPendingOperator /= parseFloat(localNumberOfOperatorMemory);
-        break;
-
-      default:
-        memoryCurrentNumber = localNumberOfOperatorMemory;
-    } */
-
-    /* memory.textContent += display.value; */
     display.value = memoryCurrentNumber;
     memoryPendingOperator = operator;
   }
@@ -104,7 +72,7 @@ const dotPress = (e) => {
   }
 
   display.value = localDecimalMemory;
-  /* memory.textContent += localDecimalMemory; */
+  memory.textContent += '.';
 };
 
 const squarePress = (e) => {
@@ -156,6 +124,8 @@ clearAll.addEventListener('click', clearAllPress);
 
 clearBackspace.addEventListener('click', clearBackspacePress);
 
+// KeyBoards
+
 const keyNumbers = [/* 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, */ 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
 const keyOperations = [106, 107, 109, 111 /* , 187, 189 */];
 
@@ -178,17 +148,6 @@ document.addEventListener('keydown', (e) => {
     }
   });
 });
-
-/* document.addEventListener('keydown', (e) => {
-  switch (e.keyCode) {
-    case e.keyCode === 13:
-      memory.textContent += '=';
-      operationPress('=');
-      break;
-    default:
-      return;
-  }
-}); */
 
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 13) {
