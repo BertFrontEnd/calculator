@@ -23,6 +23,8 @@ body {
     position: relative;
     // box-model
     display: grid;
+    // other
+    overflow: hidden;
 
     &::before {
       position: absolute;
@@ -46,13 +48,14 @@ body {
       // box-model
       grid-column: span 4;
       height: 100px;
-      padding: 10px;
+      /* padding: 10px; */
       // typography
       font-size: 18px;
       text-align: right;
       // decor
-      border: none;
+      border: 10px solid #ffffff;
       outline: none;
+      background-color: #ffffff;
     }
 
     #current-calculations {
@@ -102,13 +105,10 @@ body {
       }
     }
 
-    .active {
-      // typography
-      color: #111111;
-      // decor
-      outline: none;
-      border: none;
-      background-color: #03b1ff;
+    .equal {
+      // box-model
+      grid-column: span 4;
+      width: 320px;
     }
 
     .pow {

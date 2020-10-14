@@ -1,12 +1,13 @@
 // Search by DOM
-let numbers = document.querySelectorAll('.num');
-let operations = document.querySelectorAll('.operations');
-let dot = document.getElementById('dot');
-let square = document.getElementById('square');
-let clearAll = document.getElementById('clear-c');
-let clearBackspace = document.getElementById('clear-ce');
-let display = document.getElementById('display');
-let memory = document.getElementById('current-calculations');
+const numbers = document.querySelectorAll('.num');
+const operations = document.querySelectorAll('.operations');
+const dot = document.getElementById('dot');
+const square = document.getElementById('square');
+const clearAll = document.getElementById('clear-c');
+const clearBackspace = document.getElementById('clear-ce');
+const display = document.getElementById('display');
+const memory = document.getElementById('current-calculations');
+const negativeSign = document.getElementById('negative-sign');
 
 // Current variables
 let memoryCurrentNumber = 0;
@@ -47,7 +48,8 @@ const operationPress = (operator) => {
     } else if (memoryPendingOperator === '/') {
       memoryCurrentNumber /= parseFloat(localNumberOfOperatorMemory);
       if (localNumberOfOperatorMemory === '0') {
-        memoryCurrentNumber = 'error: division by zero';
+        memoryCurrentNumber = 'division by zero';
+        memory.textContent = 'error';
       }
     } else if (memoryPendingOperator === '^') {
       memoryCurrentNumber = parseFloat(Math.pow(memoryCurrentNumber, localNumberOfOperatorMemory));
@@ -75,9 +77,37 @@ const dotPress = (e) => {
   memory.textContent += '.';
 };
 
-const squarePress = (e) => {
+/* const squarePress = (e) => {
   display.value = parseFloat(Math.sqrt(display.value));
   memory.textContent += e.target.value;
+}; */
+
+/* const squarePress = (e) => {
+  display.value = parseFloat(Math.sqrt(display.value));
+  if (display.value >= 0) {
+    memory.textContent += e.target.value;
+  } else {
+    memory.textContent = 'error: root of a negative number';
+  }
+}; */
+
+const squarePress = (e) => {
+  if (display.value >= 0) {
+    display.value = parseFloat(Math.sqrt(display.value));
+    memory.textContent += e.target.value;
+  } else {
+    display.value = 'root of a negative number';
+    memory.textContent = 'error';
+  }
+};
+
+const negativeSignPress = (e) => {
+  if (display.value[0] === '-') {
+    return display.value;
+  } else {
+    display.value = '-' + display.value;
+  }
+  memory.textContent = '-' + memory.textContent;
 };
 
 const clearAllPress = (e) => {
@@ -99,7 +129,7 @@ const clearBackspacePress = (e) => {
   }
 };
 
-// Handlers
+// Handlers of mouse
 for (let number of numbers) {
   number.addEventListener('click', (e) => {
     let targetNumber = e.target.value;
@@ -117,18 +147,17 @@ for (let operation of operations) {
 }
 
 dot.addEventListener('click', dotPress);
-
 square.addEventListener('click', squarePress);
-
+negativeSign.addEventListener('click', negativeSignPress);
 clearAll.addEventListener('click', clearAllPress);
-
 clearBackspace.addEventListener('click', clearBackspacePress);
 
-// KeyBoards
+// KeyBoard
 
 const keyNumbers = [/* 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, */ 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
 const keyOperations = [106, 107, 109, 111 /* , 187, 189 */];
 
+// Handlers of keyBoard
 document.addEventListener('keydown', (e) => {
   keyNumbers.forEach((key) => {
     if (key === e.keyCode) {
