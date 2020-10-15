@@ -8,6 +8,8 @@ const clearBackspace = document.getElementById('clear-ce');
 const display = document.getElementById('display');
 const memory = document.getElementById('current-calculations');
 const negativeSign = document.getElementById('negative-sign');
+const helpButton = document.querySelector('.help');
+const descriptionInfo = document.querySelector('.description');
 
 // Current variables
 let memoryCurrentNumber = 0;
@@ -16,8 +18,6 @@ let memoryPendingOperator = '';
 
 // Functions
 const numberPress = (num) => {
-  console.log(`Клик по number ${num}`);
-
   if (memoryNextNumber) {
     display.value = num;
     memoryNextNumber = false;
@@ -31,7 +31,6 @@ const numberPress = (num) => {
 };
 
 const operationPress = (operator) => {
-  console.log(`Клик по operation ${operator}`);
   let localNumberOfOperatorMemory = display.value;
 
   if (memoryNextNumber && memoryPendingOperator !== '=') {
@@ -48,20 +47,22 @@ const operationPress = (operator) => {
     } else if (memoryPendingOperator === '/') {
       memoryCurrentNumber /= parseFloat(localNumberOfOperatorMemory);
       if (localNumberOfOperatorMemory === '0') {
-        memoryCurrentNumber = 'division by zero';
-        memory.textContent = 'error';
       }
     } else if (memoryPendingOperator === '^') {
       memoryCurrentNumber = parseFloat(Math.pow(memoryCurrentNumber, localNumberOfOperatorMemory));
     } else memoryCurrentNumber = parseFloat(localNumberOfOperatorMemory);
 
-    display.value = memoryCurrentNumber;
+    if (memoryCurrentNumber === Infinity) {
+      display.value = 'division by zero';
+      memory.textContent = 'error';
+    } else {
+      display.value = Math.round(memoryCurrentNumber * 10000) / 10000;
+    }
     memoryPendingOperator = operator;
   }
 };
 
 const dotPress = (e) => {
-  console.log('Клик по "."');
   let localDecimalMemory = display.value;
 
   if (memoryNextNumber) {
@@ -77,20 +78,6 @@ const dotPress = (e) => {
   memory.textContent += '.';
 };
 
-/* const squarePress = (e) => {
-  display.value = parseFloat(Math.sqrt(display.value));
-  memory.textContent += e.target.value;
-}; */
-
-/* const squarePress = (e) => {
-  display.value = parseFloat(Math.sqrt(display.value));
-  if (display.value >= 0) {
-    memory.textContent += e.target.value;
-  } else {
-    memory.textContent = 'error: root of a negative number';
-  }
-}; */
-
 const squarePress = (e) => {
   if (display.value >= 0) {
     display.value = parseFloat(Math.sqrt(display.value));
@@ -103,22 +90,20 @@ const squarePress = (e) => {
 
 const negativeSignPress = (e) => {
   if (display.value[0] === '-') {
-    return display.value;
+    display.value = display.value.slice(1);
   } else {
     display.value = '-' + display.value;
+    memory.textContent += '-';
   }
-  memory.textContent = '-' + memory.textContent;
 };
 
 const clearAllPress = (e) => {
-  console.log('Клик по "C"');
   memoryCurrentNumber = 0;
   display.value = 0;
   memory.textContent = '';
 };
 
 const clearBackspacePress = (e) => {
-  console.log('Клик по "Backspace"');
   let displayValue = display.value;
   display.value = displayValue.slice(0, -1);
   if (display.value.length === 0) {
@@ -130,6 +115,11 @@ const clearBackspacePress = (e) => {
 };
 
 // Handlers of mouse
+helpButton.addEventListener('click', () => {
+  helpButton.classList.toggle('light');
+  descriptionInfo.classList.toggle('visibility');
+});
+
 for (let number of numbers) {
   number.addEventListener('click', (e) => {
     let targetNumber = e.target.value;
@@ -154,8 +144,8 @@ clearBackspace.addEventListener('click', clearBackspacePress);
 
 // KeyBoard
 
-const keyNumbers = [/* 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, */ 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
-const keyOperations = [106, 107, 109, 111 /* , 187, 189 */];
+const keyNumbers = [96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
+const keyOperations = [106, 107, 109, 111];
 
 // Handlers of keyBoard
 document.addEventListener('keydown', (e) => {
@@ -181,7 +171,7 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 13) {
     memory.textContent += '=';
-    operationPress('=');
+    operationPress();
   }
 
   if (e.keyCode === 27) {
